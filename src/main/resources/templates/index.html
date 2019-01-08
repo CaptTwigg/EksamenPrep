@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>JPA</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous"/>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+<body>
+<div class="row">
+    <div class="col-6">
+        <h1>JS RestAPI</h1>
+        <table id="APITable" class="table table-striped">
+            <thead>
+            <tr>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-6">
+        <h1>Thymeleaf</h1>
+        <table  class="table table-striped">
+            <thead>
+            <tr>
+                <td>id</td>
+                <td>name</td>
+                <td>password</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each=" person : ${persons}">
+                <td th:text="${person.id}"></td>
+                <td th:text="${person.name}"></td>
+                <td th:text="${person.password}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+
+<script>
+
+  $.ajax({
+    method: "get",
+    url: "/api/persons",
+    success: function (list) {
+      console.log(Object.keys(list[0]));
+      var metadataLength = Object.keys(list[0]).length
+      for (var i = 0; i < metadataLength; i++) {
+
+        $('#APITable > thead tr').append('<th>' + Object.keys(list[0])[i] + '</th>');
+      }
+      for (var i = 0; i < list.length; i++) {
+
+        var course = list[i];
+        var x;
+        var tr = "<tr>";
+        for (x in course) {
+          tr += '<td>' + course[x] + '</td>'
+        }
+        tr += "</tr>";
+        $("#APITable tr:last").after(tr);
+      }
+    }
+  });
+</script>
+</html>
