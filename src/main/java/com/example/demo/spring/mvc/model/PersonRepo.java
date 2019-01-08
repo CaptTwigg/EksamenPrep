@@ -1,4 +1,4 @@
-package com.example.demo.spring.mvc.view;
+package com.example.demo.spring.mvc.model;
 
 import com.example.demo.spring.mvc.model.Person;
 

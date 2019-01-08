@@ -1,6 +1,6 @@
 package com.example.demo.spring.mvc.controller;
 
-import com.example.demo.spring.mvc.view.PersonRepo;
+import com.example.demo.spring.mvc.model.PersonRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
